@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'ProductController@index');
+
+Route::get('/admin', function () {
+    return view('fontend/layout');
 });
+
+
