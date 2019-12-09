@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Products;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -21,23 +22,33 @@ class ProductController extends Controller
     public function createProduct(Request $request){
         $products = new Products([
             'title'=>$request->title,
-            'LoaiTin'=>$request->LoaiTin,
-            'TrangThai'=>$request->TrangThai,
-            'Description'=>$request->Description,
-            'Price'=>$request->Price,
-            'TinhThanh'=>$request->TinhThanh,
-            'QuanHuyen'=>$request->QuanHuyen,
-            'PhuongXa'=>$request->PhuongXa,
-            'TenDuong'=>$request->TenDuong,
-            'Address'=>$request->Address,
-            'users_id'=>$request->users_id,
+            'form'=>$request->form,
+            'type'=>$request->type,
+            //'status'=>$request->status,
+            'description'=>$request->description,
+            'Price'=>$request->price,
+            'province'=>$request->province,
+            'district'=>$request->district,
+            'ward'=>$request->ward,
+            'street'=>$request->street,
+            'address'=>$request->address,
+            'area'=>$request->area,
+            'unit'=>$request->unit,
+            'urlImg'=>$request->urlImg,
+            'name_contact'=>$request->name_contact,
+            'address_contact'=>$request->address_contact,
+            'phone_contact'=>$request->phone_contact,
+            'email_contact'=>$request->email_contact,
+            'urlImg'=>$request->urlImg,
+            'users_id'=>$request->users_id
         ]);
         $products->save();
+        //return Redirect::to('/');
+
         return response()->json([
             'message'=>'Tao Tin Rao Thanh Cong!!'
         ], 201);
     }
-
     public function getProductById($id){
         $products= Products::find($id);
         if(is_null($products)){
@@ -67,6 +78,7 @@ class ProductController extends Controller
         $products->Address = $input['Address'];
 
         $products->save();
+
         return Response()->json([
             'message'=>'Sua tin thanh cong',
             'data'=>$products->toArray()

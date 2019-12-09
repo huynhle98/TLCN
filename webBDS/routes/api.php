@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +13,17 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->users();
+    return $request->user();
 });
 
 Route::group(['namespace'=>'Api',
     'prefix' => 'auth'
 ], function () {
-    Route::post('login', 'AuthController@login');
+    Route::group(['middleware'=>'loguser'], function(){
+        Route::post('login', 'AuthController@login');
+    });
     Route::post('signup', 'AuthController@signup');
 
     Route::group([
@@ -44,5 +47,4 @@ Route::group(['namespace'=>'Api',
     Route::delete('product/{id}', "ProductController@delProduct");
 
 });
-
 

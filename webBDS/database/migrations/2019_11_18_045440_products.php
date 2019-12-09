@@ -15,18 +15,26 @@ class Products extends Migration
     {
         Schema::create('products', function (Blueprint $table){
             $table->BigIncrements('id');
-            $table->String('title');
-            $table->dateTime('NgayDang');
-            $table->integer('LoaiTin');
-            $table->String('TrangThai');
-            $table->String('Description');
-            $table->integer('Price');
-            $table->String('TinhThanh');
-            $table->String('QuanHuyen');
-            $table->String('PhuongXa');
-            $table->String('TenDuong');
-            $table->string('Address');
-            $table->bigInteger('users_id')->unsigned()->index();
+            $table->String('title')->nullable();
+            $table->date('post_day')->nullable();
+            $table->string('form')->nullable();
+            $table->string('type')->nullable();
+            $table->String('status')->nullable();
+            $table->String('description')->nullable();
+            $table->float('Price')->nullable();
+            $table->String('province')->nullable();
+            $table->String('district')->nullable();
+            $table->String('ward')->nullable();
+            $table->String('street')->nullable();
+            $table->string('address')->nullable();
+            $table->integer('area')->nullable();
+            $table->string('unit')->nullable();
+            $table->string('urlImg')->nullable();
+            $table->string('name_contact')->nullable();
+            $table->string('address_contact')->nullable();
+            $table->string('phone_contact')->nullable();
+            $table->string('email_contact')->nullable();
+            $table->bigInteger('users_id')->unsigned()->index()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
 
